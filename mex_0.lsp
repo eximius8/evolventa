@@ -1,14 +1,14 @@
-;Написал Трунов Михаил
+;РќР°РїРёСЃР°Р» РўСЂСѓРЅРѕРІ РњРёС…Р°РёР»
 ; (C) Trunov Mikhail
 (defun ex_set_connect (file_path /) 
   (setq g_oex (vlax-get-or-create-object "Excel.Application"))
-  ; Если связь не установлена, то аварийно завершить работу
+  ; Р•СЃР»Рё СЃРІСЏР·СЊ РЅРµ СѓСЃС‚Р°РЅРѕРІР»РµРЅР°, С‚Рѕ Р°РІР°СЂРёР№РЅРѕ Р·Р°РІРµСЂС€РёС‚СЊ СЂР°Р±РѕС‚Сѓ
   (vlax-put-property g_oex "Visible" :vlax-false)
   (setq g_wkbs (vlax-get-property g_oex "Workbooks")) 
-  ; Открытие файла (книги) и получение указателя книги
+  ; РћС‚РєСЂС‹С‚РёРµ С„Р°Р№Р»Р° (РєРЅРёРіРё) Рё РїРѕР»СѓС‡РµРЅРёРµ СѓРєР°Р·Р°С‚РµР»СЏ РєРЅРёРіРё
   (setq g_awb (vlax-invoke-method g_wkbs "Open" file_path))
   (setq g_shs (vlax-get-property g_awb "Worksheets"))
-  ; Указатель на лист с нужным именем
+  ; РЈРєР°Р·Р°С‚РµР»СЊ РЅР° Р»РёСЃС‚ СЃ РЅСѓР¶РЅС‹Рј РёРјРµРЅРµРј
   (setq g_mainsh (vlax-get-property g_shs "Item" 1))
 );defun ex_set_connect
 
@@ -16,8 +16,8 @@
  (vlax-invoke-method g_awb "SaveCopyAs"  file_path) 
  (vlax-invoke-method g_awb "Close" :vlax-false :vlax-false)
  (vlax-invoke-method g_oex "Quit")
-; Освобождаем объекты, связанные с Excel,
-; для корректной выгрузки Excel из памяти
+; РћСЃРІРѕР±РѕР¶РґР°РµРј РѕР±СЉРµРєС‚С‹, СЃРІСЏР·Р°РЅРЅС‹Рµ СЃ Excel,
+; РґР»СЏ РєРѕСЂСЂРµРєС‚РЅРѕР№ РІС‹РіСЂСѓР·РєРё Excel РёР· РїР°РјСЏС‚Рё
   (mapcar
     (function
       (lambda (x)
@@ -53,7 +53,7 @@
 (defun arccos (cosalf)    
    (cond
      ((> (abs cosalf) 1)
-      (alert "\nОшибка в функции арккосинуса. Переданное значение по модулю больше единицы!")
+      (alert "\nРћС€РёР±РєР° РІ С„СѓРЅРєС†РёРё Р°СЂРєРєРѕСЃРёРЅСѓСЃР°. РџРµСЂРµРґР°РЅРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ РїРѕ РјРѕРґСѓР»СЋ Р±РѕР»СЊС€Рµ РµРґРёРЅРёС†С‹!")
      )
      ((= cosalf 0.)
       (* pi 0.5)
@@ -275,7 +275,7 @@
   );while
   (if
     (not alfw)
-    (alert "\nОшибка!\nУгол по инвалюте не выбран")    
+    (alert "\nРћС€РёР±РєР°!\nРЈРіРѕР» РїРѕ РёРЅРІР°Р»СЋС‚Рµ РЅРµ РІС‹Р±СЂР°РЅ")    
   )   
 );_end of defun
 
@@ -304,16 +304,16 @@
 
 (defun vvod (/ dety y)
   (initget 7)
-  (setq m (getreal "\nВведите модуль зацепления [мм]: "))  
+  (setq m (getreal "\nР’РІРµРґРёС‚Рµ РјРѕРґСѓР»СЊ Р·Р°С†РµРїР»РµРЅРёСЏ [РјРј]: "))  
   (initget 7)
-  (setq z1 (getreal "\nВведите число зубьев для колеса 4: "))  
+  (setq z1 (getreal "\nР’РІРµРґРёС‚Рµ С‡РёСЃР»Рѕ Р·СѓР±СЊРµРІ РґР»СЏ РєРѕР»РµСЃР° 4: "))  
   (initget 7)
-  (setq z2 (getreal "\nВведите число зубьев для колеса 5: "))  
+  (setq z2 (getreal "\nР’РІРµРґРёС‚Рµ С‡РёСЃР»Рѕ Р·СѓР±СЊРµРІ РґР»СЏ РєРѕР»РµСЃР° 5: "))  
  ;(initget 7)
-  (setq x1 (getreal "\nВведите коэффициент смещения для колеса 4: "))
+  (setq x1 (getreal "\nР’РІРµРґРёС‚Рµ РєРѕСЌС„С„РёС†РёРµРЅС‚ СЃРјРµС‰РµРЅРёСЏ РґР»СЏ РєРѕР»РµСЃР° 4: "))
   ;(initget 7)
   
-  (setq x2 (getreal "\nВведите коэффициент смещения для колеса 5: "))  
+  (setq x2 (getreal "\nР’РІРµРґРёС‚Рµ РєРѕСЌС„С„РёС†РёРµРЅС‚ СЃРјРµС‰РµРЅРёСЏ РґР»СЏ РєРѕР»РµСЃР° 5: "))  
   (setq invalfw (+ (inv (/ pi 9.)) (/ (* 2. (tg (/ pi 9.)) (+ x1 x2)) (+ z1 z2)))
   ;(ugpoinv invalfw)
   	d1 (* m z1)
@@ -344,7 +344,7 @@
 	      )
   ); setq
   (if (< eps_a 1.11)
-    (alert "Коэффициент торцевого перекрытия меньше 1,11!")
+    (alert "РљРѕСЌС„С„РёС†РёРµРЅС‚ С‚РѕСЂС†РµРІРѕРіРѕ РїРµСЂРµРєСЂС‹С‚РёСЏ РјРµРЅСЊС€Рµ 1,11!")
   ); if
 )
 
@@ -361,7 +361,7 @@
 
 (defun vseokr (/)
   (initget 65)
-  (setq o1 (getpoint "Где чертить зацепление: ")
+  (setq o1 (getpoint "Р“РґРµ С‡РµСЂС‚РёС‚СЊ Р·Р°С†РµРїР»РµРЅРёРµ: ")
 	o2 (polar o1 (* pi (/ 3. 2.)) aw))
   ;Koleso 1
   (add_arc2 o1 z1 d1 1 1)
@@ -390,7 +390,7 @@
 
 (defun profil (povor da dl db dw z tocho / sha tet rad)
   (initget 7)
-  (setq sha (/ (* 0.5 (- da dl)) (getreal "\nТочек на эвольвенте не менее: "))
+  (setq sha (/ (* 0.5 (- da dl)) (getreal "\nРўРѕС‡РµРє РЅР° СЌРІРѕР»СЊРІРµРЅС‚Рµ РЅРµ РјРµРЅРµРµ: "))
 	rad (* dl 0.5)
 	mas nil
   ); setq
@@ -409,7 +409,7 @@
 ); defun
 
 (defun cherchu (massiv centr df db d dl z povor s da / gam ksi alfa_n ugdug rr)
-  ;Переходная кривая
+  ;РџРµСЂРµС…РѕРґРЅР°СЏ РєСЂРёРІР°СЏ
   (add_pl massiv) 
   (zerkal (entlast))
   (if (or (and (< (abs (* 0.5 (- df dl)))
@@ -543,16 +543,16 @@
 	liam1_ex nil
 	liam2_ex nil
 	labpr (* (+ db1 db2) (tg alfw) 0.5)
-	shagl (/ labpr (getreal "\nТочек на кривых скольжения не менее: "))
+	shagl (/ labpr (getreal "\nРўРѕС‡РµРє РЅР° РєСЂРёРІС‹С… СЃРєРѕР»СЊР¶РµРЅРёСЏ РЅРµ РјРµРЅРµРµ: "))
   ); setq
   (initget 64)
   (setq x (* 4 shagl)
 	shag2 (/ labpr 9.0)
 	x2 shag2
-	;tochka (getpoint "\nУкажите где чертить эпюры относительного скольжения: ")
+	;tochka (getpoint "\nРЈРєР°Р¶РёС‚Рµ РіРґРµ С‡РµСЂС‚РёС‚СЊ СЌРїСЋСЂС‹ РѕС‚РЅРѕСЃРёС‚РµР»СЊРЅРѕРіРѕ СЃРєРѕР»СЊР¶РµРЅРёСЏ: ")
   ); setq
   (initget 7)
-  (setq	muliam (getreal "\nВведите во сколько увеличивать эпюры: ")
+  (setq	muliam (getreal "\nР’РІРµРґРёС‚Рµ РІРѕ СЃРєРѕР»СЊРєРѕ СѓРІРµР»РёС‡РёРІР°С‚СЊ СЌРїСЋСЂС‹: ")
   );setq
   (while (< x (- labpr (* 4 shagl)))
     (setq l1 (+ 1 (/ z2 z1) (* -1 (/ z2 z1) (/ labpr x)))
@@ -640,20 +640,20 @@
   ); add_dimarc
   (initget 1)
   (add_dimal o1 o2    
-    (getpoint "\nМежосевое рассотяние: ")
+    (getpoint "\nРњРµР¶РѕСЃРµРІРѕРµ СЂР°СЃСЃРѕС‚СЏРЅРёРµ: ")
     "\\A1;a\\H0.7x;\\S^W;\\H1.42857x;="
   ); add_dimal
   (initget 1)
   (add_dimal (polar o1 (* -0.5 pi) (* 0.5 da1))
     (polar o2 (* 0.5 pi) (* 0.5 df2))
-    (getpoint "\nРадиальный зазор: ")
+    (getpoint "\nР Р°РґРёР°Р»СЊРЅС‹Р№ Р·Р°Р·РѕСЂ: ")
     "C="
   ); add_dimal
   (liam)
   (setvar "OSMODE" old)
   (initget 64)
   (vla-addtable (vla-get-ModelSpace activedoc)
-    (vlax-3d-point (trans (getpoint "\nГде чертить таблицу основных параметров: ") 1 0))
+    (vlax-3d-point (trans (getpoint "\nР“РґРµ С‡РµСЂС‚РёС‚СЊ С‚Р°Р±Р»РёС†Сѓ РѕСЃРЅРѕРІРЅС‹С… РїР°СЂР°РјРµС‚СЂРѕРІ: ") 1 0))
     2 9 10. 11.5
   ); vla-addtable
   (vla-UnmergeCells (vlax-ename->vla-object (entlast))
@@ -667,7 +667,7 @@
   ); vla-settextheight
   (setq i 0
 	j 0
-	mas0 '("m, мм"
+	mas0 '("m, РјРј"
 	       "\\A1;Z\\H0.7x;\\S^4;"
 	       "\\A1;Z\\H0.7x;\\S^5;"
 	       "\U+03B1"
@@ -701,10 +701,10 @@
     )
   ); repeat
   (initget 1 "Yes No")
-  (if (equal "Yes" (getkword "\nЗаписать данные в excel? [Yes/No]: "))
+  (if (equal "Yes" (getkword "\nР—Р°РїРёСЃР°С‚СЊ РґР°РЅРЅС‹Рµ РІ excel? [Yes/No]: "))
     (progn
       (defun exeee ( / ref)
-  	(setq ref (getfiled "Укажите файл с шаблоном" "c:\\Zacep.xlsx" "xlsx" 128))
+  	(setq ref (getfiled "РЈРєР°Р¶РёС‚Рµ С„Р°Р№Р» СЃ С€Р°Р±Р»РѕРЅРѕРј" "c:\\Zacep.xlsx" "xlsx" 128))
   	(ex_set_connect ref)
   	(ex_put m "K7")
   	(ex_put z1 "K2")
@@ -712,7 +712,7 @@
   	(ex_put x1 "K3")
  	(ex_put x2 "M3")
   	(ex_put alfw "K5")
-  	(ex_break_connect (getfiled "Укажите где сохранять файл с таблицей" ref "xlsx" 129))
+  	(ex_break_connect (getfiled "РЈРєР°Р¶РёС‚Рµ РіРґРµ СЃРѕС…СЂР°РЅСЏС‚СЊ С„Р°Р№Р» СЃ С‚Р°Р±Р»РёС†РµР№" ref "xlsx" 129))
       ); defun
       (exeee)
     )
