@@ -1,5 +1,5 @@
 ;Написал Трунов Михаил
-; (C) Trunov Mikhail
+;Written by Trunov Mikhail
 (defun ex_set_connect (file_path /) 
   (setq g_oex (vlax-get-or-create-object "Excel.Application"))
   ; Если связь не установлена, то аварийно завершить работу
@@ -260,24 +260,6 @@
     	      (vlax-3d-point (trans p2 1 0))
   ); vla-mirror
 ); defun
-
-(defun ugpoinv (inva / uga)
-  (setq uga (/ pi 9.)
-  	alfw nil
-  )
-  (while
-    (and (< uga (/ pi 6)) (not alfw))
-    (if
-      (equal inva (inv uga) 0.000001)
-      (setq alfw uga)
-    );if
-    (setq uga (+ uga 0.000001))
-  );while
-  (if
-    (not alfw)
-    (alert "\nОшибка!\nУгол по инвалюте не выбран")    
-  )   
-);_end of defun
 
 (defun ugpoinv2 (inva / ugmax ugmin alfw)
   (setq ugmax (/ pi 6.)
