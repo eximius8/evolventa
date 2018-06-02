@@ -104,7 +104,7 @@
   (if (> (length list_of) 1)
     (progn
       (entmakex (list '(0 . "line")
-		'(48 . 0.59)
+			'(48 . 0.59)
 		      (cons 62 cvet)
 		(cons 8 (getvar "CLAYER"))
 		(cons 10 (trans (nth 0 list_of) 1 0))
@@ -288,14 +288,14 @@
   (initget 7)
   (setq m (getreal "\nВведите модуль зацепления [мм]: "))  
   (initget 7)
-  (setq z1 (getreal "\nВведите число зубьев для колеса 4: "))  
+  (setq z1 (getreal "\nВведите число зубьев для колеса 1: "))  
   (initget 7)
-  (setq z2 (getreal "\nВведите число зубьев для колеса 5: "))  
+  (setq z2 (getreal "\nВведите число зубьев для колеса 2: "))  
  ;(initget 7)
-  (setq x1 (getreal "\nВведите коэффициент смещения для колеса 4: "))
+  (setq x1 (getreal "\nВведите коэффициент смещения для колеса 1: "))
   ;(initget 7)
   
-  (setq x2 (getreal "\nВведите коэффициент смещения для колеса 5: "))  
+  (setq x2 (getreal "\nВведите коэффициент смещения для колеса 2: "))  
   (setq invalfw (+ (inv (/ pi 9.)) (/ (* 2. (tg (/ pi 9.)) (+ x1 x2)) (+ z1 z2)))
   ;(ugpoinv invalfw)
   	d1 (* m z1)
@@ -351,22 +351,22 @@
   (add_arc2 o1 z1 da1 1 5)
   (add_arc2 o1 z1 db1 1 6)
   (add_arc2 o1 z1 df1 1 7)
-  (add_diametr o1 d1 "4" (- (* pi 1.4) (/ p d1 0.5)) da1)
-  (add_diametr o1 dw1 "w4" (- (* pi 1.45) (/ p d1 0.5)) da1)  
-  (add_diametr o1 da1 "a4" (- (* pi 1.5) (/ p d1 0.5)) da1) 
-  (add_diametr o1 db1 "b4" (- (* pi 1.35) (/ p d1 0.5)) da1)  
-  (add_diametr o1 df1 "f4" (- (* pi 1.3) (/ p d1 0.5)) da1)
+  (add_diametr o1 d1 "1" (- (* pi 1.4) (/ p d1 0.5)) da1)
+  (add_diametr o1 dw1 "w1" (- (* pi 1.45) (/ p d1 0.5)) da1)  
+  (add_diametr o1 da1 "a1" (- (* pi 1.5) (/ p d1 0.5)) da1) 
+  (add_diametr o1 db1 "b1" (- (* pi 1.35) (/ p d1 0.5)) da1)  
+  (add_diametr o1 df1 "f1" (- (* pi 1.3) (/ p d1 0.5)) da1)
   ; Koleso 2
   (add_arc2 o2 z2 d2 2 1)
   (add_arc2 o2 z2 dw2 2 3)
   (add_arc2 o2 z2 da2 2 5)
   (add_arc2 o2 z2 db2 2 6)
   (add_arc2 o2 z2 df2 2 7)
-  (add_diametr o2 d2 "5" (+ (* pi 0.7) (/ p d2 0.5)) da2)  
-  (add_diametr o2 dw2 "w5" (+ (* pi 0.65) (/ p d2 0.5)) da2)  
-  (add_diametr o2 da2 "a5" (+ (* pi 0.6) (/ p d2 0.5)) da2) 
-  (add_diametr o2 db2 "b5" (+ (* pi 0.75) (/ p d2 0.5)) da2)  
-  (add_diametr o2 df2 "f5" (+ (* pi 0.8) (/ p d2 0.5)) da2)
+  (add_diametr o2 d2 "2" (+ (* pi 0.7) (/ p d2 0.5)) da2)  
+  (add_diametr o2 dw2 "w2" (+ (* pi 0.65) (/ p d2 0.5)) da2)  
+  (add_diametr o2 da2 "a2" (+ (* pi 0.6) (/ p d2 0.5)) da2) 
+  (add_diametr o2 db2 "b2" (+ (* pi 0.75) (/ p d2 0.5)) da2)  
+  (add_diametr o2 df2 "f2" (+ (* pi 0.8) (/ p d2 0.5)) da2)
   (li (list o1 o2) 7)
 ); defun
 
@@ -469,8 +469,8 @@
     	       (polar centr (+ povor (/ p (* 0.5 d)) (/ s (* 0.5 d)) (- (inv (/ pi 9)) invalfw)) (* 0.5 d))
     	       (strcat "\\A1;S\\H0.7x;\\S^"
 		       (if (= d d1)
-			 "4"
-			 "5"
+			 "1"
+			 "2"
 		       ); if
 		       ";\\H1.42857x;="
 	       ); strcat
@@ -480,8 +480,8 @@
     	       (polar centr (+ povor (/ p (* 0.5 d)) (- (inv (/ pi 9)) invalfw)) (* 0.5 d))
     	       (strcat "\\A1;e\\H0.7x;\\S^"
 		       (if (= d d1)
-			 "4"
-			 "5"
+			 "1"
+			 "2"
 		       ); if
 		       ";\\H1.42857x;="
 	       ); strcat
@@ -493,8 +493,8 @@
 	   (polar centr (+ povor (- (inv (/ pi 9)) invalfw)) (* 0.25 d))
 	   (strcat "\\A1;\U+03C4\\H0.7x;\\S^"
 		   (if (= d d1)
-			 "4"
-			 "5"
+			 "1"
+			 "2"
 		   ); if
 		   ";\\H1.42857x;="
    	   ); strcat
@@ -612,8 +612,8 @@
   (add_tex (polar o (+ pi alfw) (* 0.5 dw2 (sin alfw))) "A")
   (li (list o1 (polar o alfw (* 0.5 dw1 (sin alfw)))) 7)
   (li (list o2 (polar o (+ pi alfw) (* 0.5 dw2 (sin alfw)))) 7)
-  (add_tex o1 "\\A1;O\\H0.7x;\\S^4;\\H1.4286x;")
-  (add_tex o2 "\\A1;O\\H0.7x;\\S^5;\\H1.4286x;")
+  (add_tex o1 "\\A1;O\\H0.7x;\\S^1;\\H1.4286x;")
+  (add_tex o2 "\\A1;O\\H0.7x;\\S^2;\\H1.4286x;")
   (add_tex o "p")
   (add_dimarc o2
       	      (polar o2 (+ (* 0.5 pi) (/ p (* -0.5 d2)) (- (inv (/ pi 9)) invalfw)) (* 0.5 d2))
@@ -650,13 +650,13 @@
   (setq i 0
 	j 0
 	mas0 '("m, мм"
-	       "\\A1;Z\\H0.7x;\\S^4;"
-	       "\\A1;Z\\H0.7x;\\S^5;"
+	       "\\A1;Z\\H0.7x;\\S^1;"
+	       "\\A1;Z\\H0.7x;\\S^2;"
 	       "\U+03B1"
 	       "\\A1;h\\H0.7x;\\S^a;"
 	       "C*"
-	       "\\A1;x\\H0.7x;\\S^4;"
-	       "\\A1;x\\H0.7x;\\S^5;"
+	       "\\A1;x\\H0.7x;\\S^1;"
+	       "\\A1;x\\H0.7x;\\S^2;"
 	       "\\A1;\U+03B5\\H0.7x;\\S^a;"
 	       )
 	mas1 (list
