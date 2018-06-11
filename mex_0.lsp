@@ -1,14 +1,11 @@
-;Написал Трунов Михаил
 ;Written by Trunov Mikhail
+; Excel link taken from https://www.ozon.ru/context/detail/id/2644304/
 (defun ex_set_connect (file_path /) 
   (setq g_oex (vlax-get-or-create-object "Excel.Application"))
-  ; Если связь не установлена, то аварийно завершить работу
   (vlax-put-property g_oex "Visible" :vlax-false)
   (setq g_wkbs (vlax-get-property g_oex "Workbooks")) 
-  ; Открытие файла (книги) и получение указателя книги
   (setq g_awb (vlax-invoke-method g_wkbs "Open" file_path))
   (setq g_shs (vlax-get-property g_awb "Worksheets"))
-  ; Указатель на лист с нужным именем
   (setq g_mainsh (vlax-get-property g_shs "Item" 1))
 );defun ex_set_connect
 
@@ -16,8 +13,6 @@
  (vlax-invoke-method g_awb "SaveCopyAs"  file_path) 
  (vlax-invoke-method g_awb "Close" :vlax-false :vlax-false)
  (vlax-invoke-method g_oex "Quit")
-; Освобождаем объекты, связанные с Excel,
-; для корректной выгрузки Excel из памяти
   (mapcar
     (function
       (lambda (x)
@@ -53,7 +48,7 @@
 (defun arccos (cosalf)    
    (cond
      ((> (abs cosalf) 1)
-      (alert "\nОшибка в функции арккосинуса. Переданное значение по модулю больше единицы!")
+      (alert "\nacos not calculated")
      )
      ((= cosalf 0.)
       (* pi 0.5)
@@ -286,16 +281,16 @@
 
 (defun vvod (/ dety y)
   (initget 7)
-  (setq m (getreal "\nВведите модуль зацепления [мм]: "))  
+  (setq m (getreal "\nVvedite modul zaceplenija v [mm]: "))  
   (initget 7)
-  (setq z1 (getreal "\nВведите число зубьев для колеса 1: "))  
+  (setq z1 (getreal "\n[Z1]Vvedite chislo zubjev kolesa 1: "))  
   (initget 7)
-  (setq z2 (getreal "\nВведите число зубьев для колеса 2: "))  
+  (setq z2 (getreal "\n[Z2]Vvedite chislo zubjev kolesa 2: "))  
  ;(initget 7)
-  (setq x1 (getreal "\nВведите коэффициент смещения для колеса 1: "))
+  (setq x1 (getreal "\n[x1]Vvedite koefficient smeschenija kolesa 1: "))
   ;(initget 7)
   
-  (setq x2 (getreal "\nВведите коэффициент смещения для колеса 2: "))  
+  (setq x2 (getreal "\n[x2]Vvedite koefficient smeschenija kolesa 2: "))  
   (setq invalfw (+ (inv (/ pi 9.)) (/ (* 2. (tg (/ pi 9.)) (+ x1 x2)) (+ z1 z2)))
   ;(ugpoinv invalfw)
   	d1 (* m z1)
@@ -326,7 +321,7 @@
 	      )
   ); setq
   (if (< eps_a 1.11)
-    (alert "Коэффициент торцевого перекрытия меньше 1,11!")
+    (alert "Koefficient torcevogo perekritija men'she 1,11!")
   ); if
 )
 
@@ -343,7 +338,7 @@
 
 (defun vseokr (/)
   (initget 65)
-  (setq o1 (getpoint "Где чертить зацепление: ")
+  (setq o1 (getpoint "Ukajite gde chertit' zaceplenie: ")
 	o2 (polar o1 (* pi (/ 3. 2.)) aw))
   ;Koleso 1
   (add_arc2 o1 z1 d1 1 1)
@@ -372,7 +367,7 @@
 
 (defun profil (povor da dl db dw z tocho / sha tet rad)
   (initget 7)
-  (setq sha (/ (* 0.5 (- da dl)) (getreal "\nТочек на эвольвенте не менее: "))
+  (setq sha (/ (* 0.5 (- da dl)) (getreal "\nTochek na evolvente ne menee: "))
 	rad (* dl 0.5)
 	mas nil
   ); setq
@@ -525,16 +520,15 @@
 	liam1_ex nil
 	liam2_ex nil
 	labpr (* (+ db1 db2) (tg alfw) 0.5)
-	shagl (/ labpr (getreal "\nТочек на кривых скольжения не менее: "))
+	shagl (/ labpr (getreal "\nTochek na krivikh skoljenija ne menee: "))
   ); setq
   (initget 64)
   (setq x (* 4 shagl)
 	shag2 (/ labpr 9.0)
 	x2 shag2
-	;tochka (getpoint "\nУкажите где чертить эпюры относительного скольжения: ")
   ); setq
   (initget 7)
-  (setq	muliam (getreal "\nВведите во сколько увеличивать эпюры: ")
+  (setq	muliam (getreal "\nVvedite vo skol'ko raz uvelichivat' epuri skoljenija: ")
   );setq
   (while (< x (- labpr (* 4 shagl)))
     (setq l1 (+ 1 (/ z2 z1) (* -1 (/ z2 z1) (/ labpr x)))
@@ -622,20 +616,20 @@
   ); add_dimarc
   (initget 1)
   (add_dimal o1 o2    
-    (getpoint "\nМежосевое рассотяние: ")
+    (getpoint "\nMejosevoe rasstojanie: ")
     "\\A1;a\\H0.7x;\\S^W;\\H1.42857x;="
   ); add_dimal
   (initget 1)
   (add_dimal (polar o1 (* -0.5 pi) (* 0.5 da1))
     (polar o2 (* 0.5 pi) (* 0.5 df2))
-    (getpoint "\nРадиальный зазор: ")
+    (getpoint "\nRadial'ni zazor: ")
     "C="
   ); add_dimal
   (liam)
   (setvar "OSMODE" old)
   (initget 64)
   (vla-addtable (vla-get-ModelSpace activedoc)
-    (vlax-3d-point (trans (getpoint "\nГде чертить таблицу основных параметров: ") 1 0))
+    (vlax-3d-point (trans (getpoint "\nTablica osnovnikh parametrov: ") 1 0))
     2 9 10. 11.5
   ); vla-addtable
   (vla-UnmergeCells (vlax-ename->vla-object (entlast))
@@ -649,7 +643,7 @@
   ); vla-settextheight
   (setq i 0
 	j 0
-	mas0 '("m, мм"
+	mas0 '("m, [mm]"
 	       "\\A1;Z\\H0.7x;\\S^1;"
 	       "\\A1;Z\\H0.7x;\\S^2;"
 	       "\U+03B1"
@@ -683,10 +677,10 @@
     )
   ); repeat
   (initget 1 "Yes No")
-  (if (equal "Yes" (getkword "\nЗаписать данные в excel? [Yes/No]: "))
+  (if (equal "Yes" (getkword "\nExport parametrov v excel? [Yes/No]: "))
     (progn
       (defun exeee ( / ref)
-  	(setq ref (getfiled "Укажите файл с шаблоном" "c:\\Zacep.xlsx" "xlsx" 128))
+  	(setq ref (getfiled "Ukajite file s shablonom" "c:\\Zacep.xlsx" "xlsx" 128))
   	(ex_set_connect ref)
   	(ex_put m "K7")
   	(ex_put z1 "K2")
@@ -694,7 +688,7 @@
   	(ex_put x1 "K3")
  	(ex_put x2 "M3")
   	(ex_put alfw "K5")
-  	(ex_break_connect (getfiled "Укажите где сохранять файл с таблицей" ref "xlsx" 129))
+  	(ex_break_connect (getfiled "Gde sokhranit' file s tablicei" ref "xlsx" 129))
       ); defun
       (exeee)
     )
