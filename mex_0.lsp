@@ -289,7 +289,8 @@
  ;(initget 7)
   (setq x1 (getreal "\n[x1]Vvedite koefficient smeschenija kolesa 1: "))
   ;(initget 7)
-  
+  (setq ugolProfi (getreal "\n[alpha]Vvedite ugol profilja: "))
+  (setq ugolProfi (* ugolProfi (/ pi 180.)))
   (setq x2 (getreal "\n[x2]Vvedite koefficient smeschenija kolesa 2: "))  
   (setq invalfw (+ (inv (/ pi 9.)) (/ (* 2. (tg (/ pi 9.)) (+ x1 x2)) (+ z1 z2)))
   ;(ugpoinv invalfw)
